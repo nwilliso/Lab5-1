@@ -127,17 +127,18 @@ form.addEventListener('submit', (event) => {
 });
 
 // clear canvas and form
-clear.addEventListener('click', () => {
+clear.addEventListener('click', (e) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   generate.disabled = false;
   clear.disabled = true;
   read.disabled = true;
+  e.preventDefault(); // added to simulate video
 });
 
 // read text
 read.addEventListener('click', () => {
   let speech = new SpeechSynthesisUtterance(top.value + ' ' + bottom.value);
-  
+
   // from Mozilla (https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis)
   let sound = voice.selectedOptions[0].getAttribute('data-name');
   for(var i = 0; i < voices.length ; i++) {
